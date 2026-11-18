@@ -66,6 +66,69 @@
       (actions ? '<div class="intro-actions">' + actions + "</div>" : "");
   }
 
+  /* Tô màu cú pháp tối giản cho ô Đang code: chuỗi '...' xanh dương, biến $... hồng */
+  function highlightLine(line) {
+    var parts = String(line == null ? "" : line).split(/('[^']*')/g);
+    return parts.map(function (p) {
+      if (p.charAt(0) === "'") return '<span class="tok-str">' + esc(p) + "</span>";
+      return esc(p).replace(/\$[A-Za-z_]\w*/g, '<span class="tok-var">$&</span>');
+    }).join("");
+  }
+
+  function renderCoding(coding) {
+    var cell = document.getElementById("codingCell");
+    if (!cell) return;
+    if (!coding || !coding.lines || !coding.lines.length) { cell.hidden = true; return; }
+    var lines = coding.lines.map(highlightLine);
+    lines[lines.length - 1] += '<span class="code-caret" aria-hidden="true"></span>';
+    cell.innerHTML =
+      '<div class="code-label">Đang code</div>' +
+      '<div class="code-box">' + lines.join("\n") + "</div>" +
+      (coding.label ? '<div class="code-foot">' + esc(coding.label) + "</div>" : "");
+  }
+
+  function renderFocus(focus) {
+    var cell = document.getElementById("focusCell");
+    if (!cell) return;
+    if (!focus || !focus.title) { cell.hidden = true; return; }
+    cell.innerHTML =
+      '<div class="focus-ring" aria-hidden="true"></div>' +
+      "<div>" +
+      (focus.label ? '<div class="cell-label">' + esc(focus.label) + "</div>" : "") +
+      '<div class="focus-title">' + esc(focus.title) + "</div>" +
+      (focus.subtitle ? '<div class="focus-sub">' + esc(focus.subtitle) + "</div>" : "") +
+      "</div>";
+  }
+
+  function renderProjects(projects) {
+    var cell = document.getElementById("projectsCell");
+    if (!cell) return;
+    var featured = (projects || []).filter(function (p) { return p && p.featured; }).slice(0, 4);
+    if (!featured.length) { cell.hidden = true; return; }
+    var cards = featured.map(function (p) {
+      var inner =
+        '<div class="feat-mark" style="background:' + esc(p.color || "#7B61FF") + '">' + esc(p.mark || "") + "</div>" +
+        '<div class="feat-name">' + esc(p.name) + "</div>" +
+        (p.description ? '<div class="feat-desc">' + esc(p.description) + "</div>" : "");
+      if (p.link) return '<a class="feat-card" href="' + esc(p.link) + '" target="_blank" rel="noopener">' + inner + "</a>";
+      return '<article class="feat-card">' + inner + "</article>";
+    }).join("");
+    cell.innerHTML =
+      '<div class="proj-head"><h2 class="proj-title">Dự án đã làm</h2><span class="proj-count">' + featured.length + " dự án</span></div>" +
+      '<div class="feat-grid">' + cards + "</div>";
+  }
+
+  function renderSkills(skills) {
+    var cell = document.getElementById("skillsCell");
+    if (!cell) return;
+    if (!skills || !skills.length) { cell.hidden = true; return; }
+    cell.innerHTML =
+      '<div class="cell-label">Kỹ năng</div>' +
+      '<div class="skill-chips">' +
+      skills.map(function (s) { return '<span class="chip">' + esc(s) + "</span>"; }).join("") +
+      "</div>";
+  }
+
   function render(data) {
     var site = data.site || {};
     var profile = data.profile || {};
@@ -93,6 +156,10 @@
     }
 
     renderIntro(profile, contact);
+    renderCoding(data.coding);
+    renderFocus(data.currentFocus);
+    renderProjects(data.projects);
+    renderSkills(data.skills);
 
     var sub = document.getElementById("clockSub");
     if (sub && profile.location) sub.textContent = profile.location;
