@@ -25,8 +25,18 @@ body{
 .blob-c{width:520px;height:520px;background:#7fd7ff;bottom:-220px;left:38%;animation:drift 16s ease-in-out infinite alternate}
 @keyframes drift{from{transform:translate(0,0)}to{transform:translate(46px,34px)}}
 
+/* ---- Quầng sáng theo con trỏ trên nền (trên đốm màu, dưới lớp kính) ---- */
+.cursor-glow{
+  --cx:50%;--cy:50%;
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(520px circle at var(--cx) var(--cy),var(--glow-color,rgba(123,97,255,.18)),transparent 65%);
+  opacity:0;transition:opacity .6s ease;
+}
+.cursor-glow.on{opacity:1}
+@media (hover:none){.cursor-glow{display:none}}
+
 /* ---- Khung trang ---- */
-.page{max-width:1180px;margin:0 auto;padding:26px 20px 48px}
+.page{max-width:1180px;margin:0 auto;padding:26px 20px 48px;position:relative;z-index:1}
 .site-header{display:flex;justify-content:space-between;align-items:center;padding:2px 6px 20px}
 .domain{font-size:20px;font-weight:800;letter-spacing:-.3px}
 .status-pill{
@@ -158,4 +168,5 @@ body{
   *,*::before,*::after{animation:none!important;transition:none!important}
   .cell:hover{transform:none}
   .cell::after{display:none}
+  .cursor-glow{display:none}
 }

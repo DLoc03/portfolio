@@ -4,6 +4,14 @@
 
   var DEFAULT_TZ = "Asia/Ho_Chi_Minh";
   var clockTimer = null;
+  var glowEl = document.querySelector(".cursor-glow");
+
+  function glowColorFromHex(hex) {
+    var m = /^#?([0-9a-f]{6})$/i.exec(String(hex || ""));
+    if (!m) return null;
+    var n = parseInt(m[1], 16);
+    return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255) + "," + (n & 255) + ",.18)";
+  }
 
   function esc(s) {
     return String(s == null ? "" : s)
@@ -65,6 +73,8 @@
 
     if (site.accent) {
       document.documentElement.style.setProperty("--accent", site.accent);
+      var gc = glowColorFromHex(site.accent);
+      if (gc && glowEl) glowEl.style.setProperty("--glow-color", gc);
     }
     if (site.domain) {
       document.getElementById("siteDomain").textContent = site.domain;
@@ -135,6 +145,35 @@
           cell.style.setProperty("--ry", "0deg");
         }
       });
+    });
+  }
+
+  /* ---- Quầng sáng nền đuổi theo con trỏ (lerp 0.12 mỗi khung hình cho mềm) ----
+     Chuột rời cửa sổ → bỏ lớp .on, quầng sáng mờ dần trong 0.6s (transition ở CSS). */
+  if (glowEl && canHover && !reducedMotion) {
+    var tx = window.innerWidth / 2, ty = window.innerHeight / 2;
+    var gx = tx, gy = ty, glowRaf = null;
+    function glowStep() {
+      gx += (tx - gx) * 0.12;
+      gy += (ty - gy) * 0.12;
+      glowEl.style.setProperty("--cx", gx.toFixed(1) + "px");
+      glowEl.style.setProperty("--cy", gy.toFixed(1) + "px");
+      if (Math.abs(tx - gx) > 0.1 || Math.abs(ty - gy) > 0.1) {
+        glowRaf = requestAnimationFrame(glowStep);
+      } else {
+        glowRaf = null;
+      }
+    }
+    function glowKick() { if (glowRaf === null) glowRaf = requestAnimationFrame(glowStep); }
+    window.addEventListener("pointermove", function (e) {
+      tx = e.clientX;
+      ty = e.clientY;
+      glowEl.classList.add("on");
+      glowKick();
+    }, { passive: true });
+    document.addEventListener("mouseleave", function () { glowEl.classList.remove("on"); });
+    document.addEventListener("mouseout", function (e) {
+      if (!e.relatedTarget) glowEl.classList.remove("on");
     });
   }
 
