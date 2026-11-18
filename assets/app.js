@@ -191,8 +191,8 @@
         cell.style.setProperty("--mx", px + "px");
         cell.style.setProperty("--my", py + "px");
         if (isTilt) {
-          var rx = (0.5 - py / h) * 3; /* tối đa ±1.5deg */
-          var ry = (px / w - 0.5) * 3;
+          var rx = (0.5 - py / h) * 2; /* tối đa ±1deg */
+          var ry = (px / w - 0.5) * 2;
           cell.style.setProperty("--rx", rx.toFixed(2) + "deg");
           cell.style.setProperty("--ry", ry.toFixed(2) + "deg");
         }
@@ -208,8 +208,9 @@
       cell.addEventListener("pointerleave", function () {
         if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
         if (isTilt) {
-          cell.style.setProperty("--rx", "0deg");
-          cell.style.setProperty("--ry", "0deg");
+          /* Gỡ hẳn biến góc nghiêng để transform trả về none, không treo rotate(0deg) */
+          cell.style.removeProperty("--rx");
+          cell.style.removeProperty("--ry");
         }
       });
     });
