@@ -1,0 +1,82 @@
+{
+  "site": {
+    "domain": "dailoc.dev",
+    "accent": "#7B61FF",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "status": "Sẵn sàng kết nối"
+  },
+  "profile": {
+    "fullName": "Nguyễn Đức Đại Lộc",
+    "shortName": "Đại Lộc",
+    "initial": "L",
+    "avatar": "",
+    "title": "Web Developer",
+    "company": "Moma Solutions",
+    "location": "Lâm Đồng · GMT+7",
+    "bio": "Web Developer tại Moma Solutions. Tôi phát triển Moma Portal và các module ERP trên nền Perfex CRM cho khách hàng doanh nghiệp.",
+    "cvUrl": "assets/cv.pdf"
+  },
+  "currentFocus": {
+    "label": "Đang phụ trách",
+    "title": "Moma Portal",
+    "subtitle": "my.momasolutions.vn · cổng khách hàng, ví xu, mua API"
+  },
+  "coding": {
+    "label": "PHP · CodeIgniter",
+    "lines": ["$this->load->model(", "  'projects_model'", ");"]
+  },
+  "skills": ["PHP", "Perfex CRM", "MySQL", "JavaScript", "REST API", "Git"],
+  "experience": [
+    { "role": "Web Developer", "org": "Moma Solutions", "time": "[THÁNG/NĂM] – nay", "current": true },
+    { "role": "[VỊ TRÍ]", "org": "[CÔNG TY]", "time": "[THỜI GIAN]", "current": false },
+    { "role": "[NGÀNH HỌC]", "org": "[TRƯỜNG]", "time": "[NĂM]", "current": false }
+  ],
+  "projects": [
+    {
+      "name": "Moma Portal",
+      "mark": "P",
+      "color": "#7B61FF",
+      "description": "Cổng khách hàng, ví xu, quản lý đơn",
+      "tags": ["PHP", "Portal"],
+      "link": "",
+      "image": "",
+      "featured": true
+    },
+    {
+      "name": "Module Quản lý Project",
+      "mark": "PM",
+      "color": "#0A84FF",
+      "description": "ERP Perfex cho khách doanh nghiệp",
+      "tags": ["Perfex CRM", "ERP"],
+      "link": "",
+      "image": "",
+      "featured": true
+    },
+    {
+      "name": "Module Hoa hồng",
+      "mark": "%",
+      "color": "#FF9F0A",
+      "description": "Số hoá file Excel thành module ERP",
+      "tags": ["Perfex CRM", "MySQL"],
+      "link": "",
+      "image": "",
+      "featured": true
+    },
+    {
+      "name": "Tích hợp API Moma",
+      "mark": "AI",
+      "color": "#30B158",
+      "description": "Gateway AI trong Portal, tính phí theo xu",
+      "tags": ["REST API", "AI"],
+      "link": "",
+      "image": "",
+      "featured": true
+    }
+  ],
+  "contact": {
+    "email": "[EMAIL]",
+    "phone": "[SĐT]",
+    "linkedin": "https://linkedin.com/in/[TÊN]",
+    "github": "https://github.com/[TÊN]"
+  }
+}
