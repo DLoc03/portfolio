@@ -99,6 +99,45 @@
   // Đồng hồ chạy ngay cả khi JSON lỗi (dùng múi giờ mặc định).
   startClock(DEFAULT_TZ);
 
+  /* ---- Đốm sáng theo chuột cho mọi ô; ô nhỏ (.tilt) nghiêng nhẹ theo hướng chuột ----
+     Tắt hẳn trên thiết bị cảm ứng (hover: none / pointer thô) và khi prefers-reduced-motion. */
+  var canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (canHover && !reducedMotion) {
+    var cells = document.querySelectorAll(".cell");
+    Array.prototype.forEach.call(cells, function (cell) {
+      var isTilt = cell.classList.contains("tilt");
+      var rafId = null, px = 0, py = 0, w = 0, h = 0;
+      function apply() {
+        rafId = null;
+        if (!w || !h) return;
+        cell.style.setProperty("--mx", px + "px");
+        cell.style.setProperty("--my", py + "px");
+        if (isTilt) {
+          var rx = (0.5 - py / h) * 3; /* tối đa ±1.5deg */
+          var ry = (px / w - 0.5) * 3;
+          cell.style.setProperty("--rx", rx.toFixed(2) + "deg");
+          cell.style.setProperty("--ry", ry.toFixed(2) + "deg");
+        }
+      }
+      cell.addEventListener("pointermove", function (e) {
+        var rect = cell.getBoundingClientRect();
+        px = e.clientX - rect.left;
+        py = e.clientY - rect.top;
+        w = rect.width;
+        h = rect.height;
+        if (rafId === null) rafId = requestAnimationFrame(apply);
+      });
+      cell.addEventListener("pointerleave", function () {
+        if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+        if (isTilt) {
+          cell.style.setProperty("--rx", "0deg");
+          cell.style.setProperty("--ry", "0deg");
+        }
+      });
+    });
+  }
+
   if (window.fetch) {
     fetch("data/profile.json", { cache: "no-store" })
       .then(function (res) {
