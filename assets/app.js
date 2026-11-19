@@ -114,7 +114,7 @@
       return '<article class="feat-card">' + inner + "</article>";
     }).join("");
     cell.innerHTML =
-      '<div class="proj-head"><h2 class="proj-title">Dự án đã làm</h2><span class="proj-count">' + featured.length + " dự án</span></div>" +
+      '<div class="proj-head"><h2 class="proj-title">Dự án tiêu biểu</h2><span class="proj-count">' + featured.length + " dự án</span></div>" +
       '<div class="feat-grid">' + cards + "</div>";
   }
 

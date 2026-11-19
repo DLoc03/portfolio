@@ -10,22 +10,22 @@
     "shortName": "Đại Lộc",
     "initial": "L",
     "avatar": "",
-    "title": "Web Developer",
+    "title": "Software Developer",
     "company": "Moma Solutions",
-    "location": "Lâm Đồng · GMT+7",
-    "bio": "Web Developer tại Moma Solutions. Tôi phát triển Moma Portal và các module ERP trên nền Perfex CRM cho khách hàng doanh nghiệp.",
+    "location": "Đà Lạt · GMT+7",
+    "bio": "Lập trình viên tại Moma Solutions, phát triển đa mảng — web, ERP doanh nghiệp và sản phẩm ứng dụng AI — với trọng tâm là Moma Portal, cổng trung tâm của hệ sinh thái dịch vụ Moma.",
     "cvUrl": "assets/cv.pdf"
   },
   "currentFocus": {
     "label": "Đang phụ trách",
     "title": "Moma Portal",
-    "subtitle": "my.momasolutions.vn · cổng khách hàng, ví xu, mua API"
+    "subtitle": "my.momasolutions.vn · cổng trung tâm dịch vụ khách hàng, tích hợp ví xu và mua API"
   },
   "coding": {
-    "label": "PHP · CodeIgniter",
-    "lines": ["$this->load->model(", "  'projects_model'", ");"]
+    "label": "JavaScript",
+    "lines": ["fetch('data/profile.json')", "  .then(r => r.json())", "  .then(render);"]
   },
-  "skills": ["PHP", "Perfex CRM", "MySQL", "JavaScript", "REST API", "Git"],
+  "skills": ["JavaScript", "Perfex CRM", "MySQL", "Git", "Tích hợp API bên thứ 3", "Phân tích yêu cầu", "E2E Testing", "Vibe Coding"],
   "experience": [
     { "role": "Web Developer", "org": "Moma Solutions", "time": "[THÁNG/NĂM] – nay", "current": true },
     { "role": "[VỊ TRÍ]", "org": "[CÔNG TY]", "time": "[THỜI GIAN]", "current": false },
@@ -38,7 +38,7 @@
       "color": "#7B61FF",
       "description": "Cổng khách hàng, ví xu, quản lý đơn",
       "tags": ["PHP", "Portal"],
-      "link": "",
+      "link": "https://my.momasolutions.vn",
       "image": "",
       "featured": true
     },
@@ -53,22 +53,22 @@
       "featured": true
     },
     {
-      "name": "Module Hoa hồng",
-      "mark": "%",
-      "color": "#FF9F0A",
-      "description": "Số hoá file Excel thành module ERP",
-      "tags": ["Perfex CRM", "MySQL"],
-      "link": "",
+      "name": "Moma Media Studio",
+      "mark": "MS",
+      "color": "#FF6482",
+      "description": "Studio tạo ảnh và video AI theo kịch bản",
+      "tags": ["AI", "Media"],
+      "link": "https://media.momasolutions.vn/app",
       "image": "",
       "featured": true
     },
     {
-      "name": "Tích hợp API Moma",
-      "mark": "AI",
-      "color": "#30B158",
-      "description": "Gateway AI trong Portal, tính phí theo xu",
-      "tags": ["REST API", "AI"],
-      "link": "",
+      "name": "Thọ Vô lăng",
+      "mark": "TV",
+      "color": "#FF9F0A",
+      "description": "Hệ sinh thái dịch vụ xe và lái hộ taxi riêng",
+      "tags": ["Web App", "Dịch vụ xe"],
+      "link": "https://thoauto.momasolutions.vn/",
       "image": "",
       "featured": true
     }
