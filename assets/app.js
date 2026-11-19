@@ -194,7 +194,7 @@
     list = Array.isArray(list) ? list.filter(Boolean) : [];
     if (!list.length) { cell.hidden = true; return; }
     cell.innerHTML =
-      '<div class="cell-label">Sở thích</div><div class="chips">' +
+      '<div class="cell-label">Sở thích</div><div class="skill-chips">' +
       list.map(function (h) { return '<span class="chip">' + esc(h) + "</span>"; }).join("") +
       "</div>";
   }
