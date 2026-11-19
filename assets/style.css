@@ -208,7 +208,7 @@ a.feat-card{display:flex;flex-direction:column;text-decoration:none;color:inheri
 .btn-linkedin{background:#0a66c2;color:#fff;box-shadow:0 14px 26px rgba(10,102,194,.28)}
 
 /* ---- Ô Kỹ năng ---- */
-.skill-chips{display:flex;flex-wrap:wrap;gap:9px}
+.skill-chips,.chips{display:flex;flex-wrap:wrap;gap:9px}
 .chip{
   background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.65);
   border-radius:999px;padding:8px 15px;font-size:14px;font-weight:600;
