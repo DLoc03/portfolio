@@ -165,6 +165,27 @@
     cell.innerHTML = '<div class="cell-label">Kinh nghiệm</div><div class="exp-list">' + rows + "</div>";
   }
 
+  function renderContact(contact) {
+    var cell = document.getElementById("contactCell");
+    if (!cell) return;
+    contact = contact || {};
+    if (!contact.email && !contact.linkedin && !contact.github && !contact.phone) { cell.hidden = true; return; }
+    var actions = "";
+    if (contact.linkedin) {
+      actions += '<a class="btn btn-linkedin" href="' + esc(contact.linkedin) + '" target="_blank" rel="noopener">LinkedIn</a>';
+    }
+    if (contact.github) {
+      actions += '<a class="btn btn-light" href="' + esc(contact.github) + '" target="_blank" rel="noopener">GitHub</a>';
+    }
+    if (contact.phone) {
+      actions += '<a class="btn btn-light" href="tel:' + esc(contact.phone.replace(/[\s.]/g, "")) + '">' + esc(contact.phone) + "</a>";
+    }
+    cell.innerHTML =
+      '<div class="cell-label">Liên hệ</div>' +
+      (contact.email ? '<a class="contact-email" href="mailto:' + esc(contact.email) + '">' + esc(contact.email) + "</a>" : "") +
+      (actions ? '<div class="contact-actions">' + actions + "</div>" : "");
+  }
+
   function render(data) {
     var site = data.site || {};
     var profile = data.profile || {};
@@ -197,6 +218,7 @@
     renderProjects(data.projects);
     renderSkills(data.skills);
     renderExperience(data.experience);
+    renderContact(contact);
 
     var sub = document.getElementById("clockSub");
     if (sub && profile.location) sub.textContent = profile.location;

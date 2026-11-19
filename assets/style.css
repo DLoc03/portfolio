@@ -198,6 +198,14 @@ a.feat-card{display:flex;flex-direction:column;text-decoration:none;color:inheri
 .exp-time.is-current{color:var(--accent,#7B61FF)}
 .exp-desc{font-size:14px;line-height:1.55;color:#55506a;margin-top:5px}
 
+/* ---- Ô Liên hệ ---- */
+.contact-email{
+  display:block;font-size:clamp(24px,2.6vw,34px);font-weight:800;letter-spacing:-.5px;
+  color:inherit;text-decoration:none;line-height:1.2;margin:4px 0 22px;overflow-wrap:anywhere;
+}
+.contact-actions{display:flex;flex-wrap:wrap;gap:12px}
+.btn-linkedin{background:#0a66c2;color:#fff;box-shadow:0 14px 26px rgba(10,102,194,.28)}
+
 /* ---- Ô Kỹ năng ---- */
 .skill-chips{display:flex;flex-wrap:wrap;gap:9px}
 .chip{
