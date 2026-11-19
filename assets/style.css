@@ -188,6 +188,16 @@ a.feat-card{display:flex;flex-direction:column;text-decoration:none;color:inheri
 .feat-desc{font-size:14px;line-height:1.5;color:#55506a}
 .feat-link{margin-top:auto;padding-top:14px;font-size:13.5px;font-weight:700;color:var(--accent,#7B61FF)}
 
+/* ---- Ô Kinh nghiệm ---- */
+.exp-list{display:flex;flex-direction:column;gap:20px}
+.exp-top{display:flex;justify-content:space-between;align-items:baseline;gap:14px}
+.exp-head{font-size:17px;font-weight:700;line-height:1.35}
+.exp-org{color:inherit;text-decoration:none}
+.exp-org:hover{text-decoration:underline}
+.exp-time{font-size:14.5px;font-weight:600;color:var(--muted);white-space:nowrap}
+.exp-time.is-current{color:var(--accent,#7B61FF)}
+.exp-desc{font-size:14px;line-height:1.55;color:#55506a;margin-top:5px}
+
 /* ---- Ô Kỹ năng ---- */
 .skill-chips{display:flex;flex-wrap:wrap;gap:9px}
 .chip{

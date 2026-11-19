@@ -27,9 +27,30 @@
   },
   "skills": ["JavaScript", "Perfex CRM", "MySQL", "Git", "API Integration", "Phân tích yêu cầu", "E2E Testing", "Vibe Coding"],
   "experience": [
-    { "role": "Web Developer", "org": "Moma Solutions", "time": "[THÁNG/NĂM] – nay", "current": true },
-    { "role": "[VỊ TRÍ]", "org": "[CÔNG TY]", "time": "[THỜI GIAN]", "current": false },
-    { "role": "[NGÀNH HỌC]", "org": "[TRƯỜNG]", "time": "[NĂM]", "current": false }
+    {
+      "role": "Software Developer",
+      "org": "Moma Solutions",
+      "link": "https://momasolutions.vn/",
+      "time": "8/2026 – nay",
+      "current": true,
+      "desc": "Phát triển Moma Portal — cổng trung tâm dịch vụ khách hàng tích hợp ví xu và mua API — cùng các module ERP trên nền Perfex CRM cho doanh nghiệp (tiêu biểu: quản lý dự án cho NTH Auto) và Moma Media Studio, nền tảng tạo ảnh, video AI theo kịch bản."
+    },
+    {
+      "role": "Software Engineer",
+      "org": "Suri Technologies",
+      "link": "https://suritechs.com/",
+      "time": "6/2025 – 7/2026",
+      "current": false,
+      "desc": "Phụ trách trọn vòng đời dự án khách hàng — từ phân tích yêu cầu, thiết kế hệ thống, UX/UI đến lập trình Web & App — kiêm quản lý dự án và dẫn dắt team phát triển."
+    },
+    {
+      "role": "Internship",
+      "org": "Titan Technology",
+      "link": "https://titancorpvn.com/",
+      "time": "3/2025 – 5/2025",
+      "current": false,
+      "desc": "Góp phần triển khai website tích hợp Chatbot AI và xây dựng công cụ CMS quản trị nội dung cho khách hàng doanh nghiệp."
+    }
   ],
   "projects": [
     {

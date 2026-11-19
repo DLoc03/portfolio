@@ -145,6 +145,26 @@
       "</div>";
   }
 
+  function renderExperience(experience) {
+    var cell = document.getElementById("expCell");
+    if (!cell) return;
+    var items = (experience || []).filter(function (e) { return e && (e.role || e.org); });
+    if (!items.length) { cell.hidden = true; return; }
+    var rows = items.map(function (e) {
+      var org = e.link
+        ? '<a class="exp-org" href="' + esc(e.link) + '" target="_blank" rel="noopener">' + esc(e.org) + "</a>"
+        : esc(e.org || "");
+      var head = (e.role ? esc(e.role) : "") + (e.role && e.org ? " · " : "") + org;
+      return '<div class="exp-item">' +
+        '<div class="exp-top"><span class="exp-head">' + head + "</span>" +
+        (e.time ? '<span class="exp-time' + (e.current ? " is-current" : "") + '">' + esc(e.time) + "</span>" : "") +
+        "</div>" +
+        (e.desc ? '<p class="exp-desc">' + esc(e.desc) + "</p>" : "") +
+        "</div>";
+    }).join("");
+    cell.innerHTML = '<div class="cell-label">Kinh nghiệm</div><div class="exp-list">' + rows + "</div>";
+  }
+
   function render(data) {
     var site = data.site || {};
     var profile = data.profile || {};
@@ -176,6 +196,7 @@
     renderFocus(data.currentFocus);
     renderProjects(data.projects);
     renderSkills(data.skills);
+    renderExperience(data.experience);
 
     var sub = document.getElementById("clockSub");
     if (sub && profile.location) sub.textContent = profile.location;
