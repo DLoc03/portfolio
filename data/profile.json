@@ -25,7 +25,32 @@
     "label": "JavaScript",
     "lines": ["fetch('profile.json')", "  .then(r => r.json())", "  .then(render);"]
   },
+  "personalProjects": [
+    {
+      "name": "GenZ Story",
+      "mark": "GZ",
+      "icon": "book",
+      "color": "#FF8FB8",
+      "description": "Game kể chuyện về hành trình của một GenZ từ thời đại học đến lúc tìm việc làm. Mỗi lựa chọn mở ra một nhánh rẽ khác nhau — không có lựa chọn nào đúng hoàn toàn, hãy chọn để bản thân không phải hối tiếc. Thông điệp: “Cơ hội sẽ không đến nếu chúng ta đánh mất hi vọng”.",
+      "tags": ["PWA", "Game tương tác", "Nhiều kết thúc"],
+      "link": "",
+      "note": "Hiện đang đóng · Repo công ty"
+    },
+    {
+      "name": "Cờ Vua vs Cờ Tướng",
+      "mark": "CV",
+      "icon": "crown",
+      "color": "#9E2B25",
+      "description": "Dự án cá nhân từ một ý tưởng bất chợt khá độc đáo: hai bộ cờ đối đầu trên cùng một bàn cờ, giữ nguyên toàn bộ nước đi và bản sắc của từng quân — sự cân bằng được tạo ra bằng luật bổ trợ, không bằng cách sửa luật đi.",
+      "tags": ["Game chiến thuật", "Chơi online 2 người"],
+      "link": "https://dloc03.github.io/co-vua-vs-co-tuong/",
+      "linkText": "Chơi ngay",
+      "repo": "https://github.com/DLoc03/co-vua-vs-co-tuong",
+      "repoText": "Mã nguồn"
+    }
+  ],
   "skills": ["JavaScript", "Perfex CRM", "MySQL", "Git", "API Integration", "Phân tích yêu cầu", "E2E Testing", "Vibe Coding"],
+  "hobbies": ["Nghe nhạc", "Bạc Xỉu Đá", "Mèo", "Làm việc ở quán cà phê"],
   "experience": [
     {
       "role": "Software Developer",

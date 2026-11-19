@@ -105,7 +105,9 @@
     globe: '<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
     clipboard: '<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="m9 14 2 2 4-4"/>',
     image: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>',
-    car: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>'
+    car: '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.5 3A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/>',
+    book: '<path d="M12 6.5C10.2 4.9 7.9 4.3 4 4.3v14.4c3.9 0 6.2.6 8 2.2 1.8-1.6 4.1-2.2 8-2.2V4.3c-3.9 0-6.2.6-8 2.2z"/><path d="M12 6.5v14.4"/>',
+    crown: '<path d="M3 8.5 7.5 12 12 5.5 16.5 12 21 8.5 19.6 18H4.4L3 8.5z"/><path d="M5 21h14"/>'
   };
 
   function projectGlyph(p) {
@@ -186,6 +188,68 @@
       (actions ? '<div class="contact-actions">' + actions + "</div>" : "");
   }
 
+  function renderHobbies(list) {
+    var cell = document.getElementById("hobbiesCell");
+    if (!cell) return;
+    list = Array.isArray(list) ? list.filter(Boolean) : [];
+    if (!list.length) { cell.hidden = true; return; }
+    cell.innerHTML =
+      '<div class="cell-label">Sở thích</div><div class="chips">' +
+      list.map(function (h) { return '<span class="chip">' + esc(h) + "</span>"; }).join("") +
+      "</div>";
+  }
+
+  function setupReveal(scope) {
+    var cards = scope.querySelectorAll(".p-card");
+    if (!("IntersectionObserver" in window)) {
+      cards.forEach(function (c) { c.classList.add("in"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    cards.forEach(function (c) { io.observe(c); });
+  }
+
+  function renderPersonalProjects(list) {
+    var section = document.getElementById("personalSection");
+    var grid = document.getElementById("personalGrid");
+    if (!section || !grid) return;
+    list = Array.isArray(list) ? list : [];
+    if (!list.length) { section.hidden = true; return; }
+    grid.innerHTML = list.map(function (p) {
+      var tags = (p.tags || []).map(function (t) { return '<span class="p-tag">' + esc(t) + "</span>"; }).join("");
+      var foot = "";
+      if (p.link) {
+        foot = '<a class="p-link" href="' + esc(p.link) + '" target="_blank" rel="noopener">' + esc(p.linkText || "Truy cập") + ' <span aria-hidden="true">↗</span></a>';
+        if (p.repo) {
+          foot += '<a class="p-link p-link-repo" href="' + esc(p.repo) + '" target="_blank" rel="noopener">' + esc(p.repoText || "Mã nguồn") + ' <span aria-hidden="true">↗</span></a>';
+        }
+      } else if (p.note) {
+        foot = '<span class="p-note">' + esc(p.note) + "</span>";
+      }
+      return '<article class="p-card">' +
+        '<div class="feat-mark" style="background:' + esc(p.color || "#7B61FF") + '">' + projectGlyph(p) + "</div>" +
+        '<h3 class="p-name">' + esc(p.name) + "</h3>" +
+        '<p class="p-desc">' + esc(p.description) + "</p>" +
+        (tags ? '<div class="p-tags">' + tags + "</div>" : "") +
+        (foot ? '<div class="p-foot">' + foot + "</div>" : "") +
+        "</article>";
+    }).join("");
+    setupReveal(grid);
+  }
+
+  function renderFooter(data) {
+    var footer = document.getElementById("siteFooter");
+    if (!footer) return;
+    var right = data.profile.title + (data.profile.company ? " · " + data.profile.company : "");
+    footer.innerHTML =
+      "<span>© " + new Date().getFullYear() + " " + esc(data.profile.fullName) + "</span>" +
+      "<span>" + esc(right) + "</span>";
+  }
+
   function render(data) {
     var site = data.site || {};
     var profile = data.profile || {};
@@ -219,6 +283,9 @@
     renderSkills(data.skills);
     renderExperience(data.experience);
     renderContact(contact);
+    renderHobbies(data.hobbies);
+    renderPersonalProjects(data.personalProjects);
+    renderFooter(data);
 
     var sub = document.getElementById("clockSub");
     if (sub && profile.location) sub.textContent = profile.location;
