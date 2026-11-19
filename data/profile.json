@@ -23,9 +23,9 @@
   },
   "coding": {
     "label": "JavaScript",
-    "lines": ["fetch('data/profile.json')", "  .then(r => r.json())", "  .then(render);"]
+    "lines": ["fetch('profile.json')", "  .then(r => r.json())", "  .then(render);"]
   },
-  "skills": ["JavaScript", "Perfex CRM", "MySQL", "Git", "Tích hợp API bên thứ 3", "Phân tích yêu cầu", "E2E Testing", "Vibe Coding"],
+  "skills": ["JavaScript", "Perfex CRM", "MySQL", "Git", "API Integration", "Phân tích yêu cầu", "E2E Testing", "Vibe Coding"],
   "experience": [
     { "role": "Web Developer", "org": "Moma Solutions", "time": "[THÁNG/NĂM] – nay", "current": true },
     { "role": "[VỊ TRÍ]", "org": "[CÔNG TY]", "time": "[THỜI GIAN]", "current": false },
@@ -35,6 +35,7 @@
     {
       "name": "Moma Portal",
       "mark": "P",
+      "icon": "globe",
       "color": "#7B61FF",
       "description": "Cổng khách hàng, ví xu, quản lý đơn",
       "tags": ["PHP", "Portal"],
@@ -45,6 +46,7 @@
     {
       "name": "Module Quản lý Project",
       "mark": "PM",
+      "icon": "clipboard",
       "color": "#0A84FF",
       "description": "ERP Perfex cho khách doanh nghiệp",
       "tags": ["Perfex CRM", "ERP"],
@@ -55,6 +57,7 @@
     {
       "name": "Moma Media Studio",
       "mark": "MS",
+      "icon": "image",
       "color": "#FF6482",
       "description": "Studio tạo ảnh và video AI theo kịch bản",
       "tags": ["AI", "Media"],
@@ -65,6 +68,7 @@
     {
       "name": "Thọ Vô lăng",
       "mark": "TV",
+      "icon": "car",
       "color": "#FF9F0A",
       "description": "Hệ sinh thái dịch vụ xe và lái hộ taxi riêng",
       "tags": ["Web App", "Dịch vụ xe"],
