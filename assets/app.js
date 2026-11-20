@@ -171,13 +171,16 @@
     var cell = document.getElementById("contactCell");
     if (!cell) return;
     contact = contact || {};
-    if (!contact.email && !contact.linkedin && !contact.github && !contact.phone) { cell.hidden = true; return; }
+    if (!contact.email && !contact.linkedin && !contact.github && !contact.phone && !contact.blog) { cell.hidden = true; return; }
     var actions = "";
     if (contact.linkedin) {
       actions += '<a class="btn btn-linkedin" href="' + esc(contact.linkedin) + '" target="_blank" rel="noopener">LinkedIn</a>';
     }
     if (contact.github) {
       actions += '<a class="btn btn-light" href="' + esc(contact.github) + '" target="_blank" rel="noopener">GitHub</a>';
+    }
+    if (contact.blog) {
+      actions += '<a class="btn btn-light" href="' + esc(contact.blog) + '" target="_blank" rel="noopener">Blog nhật ký Bạc Xỉu</a>';
     }
     if (contact.phone) {
       actions += '<a class="btn btn-light" href="tel:' + esc(contact.phone.replace(/[\s.]/g, "")) + '">' + esc(contact.phone) + "</a>";

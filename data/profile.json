@@ -14,7 +14,7 @@
     "company": "Moma Solutions",
     "location": "Lâm Đồng · GMT+7",
     "bio": "Lập trình viên tại Moma Solutions, phát triển đa mảng — web, ERP doanh nghiệp và sản phẩm ứng dụng AI — với trọng tâm là Moma Portal, cổng trung tâm của hệ sinh thái dịch vụ Moma.",
-    "cvUrl": "assets/cv.pdf"
+    "cvUrl": ""
   },
   "currentFocus": {
     "label": "Đang phụ trách",
@@ -127,6 +127,7 @@
     "email": "locn9730@gmail.com",
     "phone": "",
     "linkedin": "https://www.linkedin.com/in/locnguyen1502",
-    "github": "https://github.com/DLoc03"
+    "github": "https://github.com/DLoc03",
+    "blog": "https://dloc03.github.io/bac-xiu-lab/"
   }
 }
