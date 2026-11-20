@@ -74,6 +74,7 @@
   function ask(q) {
     q = (q || '').trim();
     if (!q || busy) return;
+    chipsBox.classList.add('hidden');
     busy = true;
     sendBtn.disabled = true;
     addMsg('user', q);
