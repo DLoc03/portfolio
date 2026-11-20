@@ -33,7 +33,7 @@
     '<div class="hl-head"><img src="' + AVATAR + '" alt="Avatar Hỏi Lộc"><div class="hl-titles"><b>Hỏi Lộc</b><small>Trợ lý AI · trả lời về Lộc và công việc</small></div><button class="hl-close" type="button" aria-label="Đóng">✕</button></div>' +
     '<div class="hl-body"></div>' +
     '<div class="hl-typing"><i></i><i></i><i></i></div>' +
-    '<div class="hl-chips"></div>' +
+    '<div class="hl-chips-wrap"><button type="button" class="hl-nav prev" aria-label="Gợi ý trước">‹</button><div class="hl-chips"></div><button type="button" class="hl-nav next" aria-label="Gợi ý tiếp">›</button></div>' +
     '<form class="hl-form"><input type="text" maxlength="300" placeholder="Hỏi về Lộc…" autocomplete="off"><button type="submit">Gửi</button></form>' +
     '<p class="hl-note">AI có thể trả lời chưa chính xác — thông tin chính thức ở các mục trên trang.</p>';
 
@@ -42,7 +42,11 @@
 
   var body = panel.querySelector('.hl-body');
   var typing = panel.querySelector('.hl-typing');
+  var chipsWrap = panel.querySelector('.hl-chips-wrap');
   var chipsBox = panel.querySelector('.hl-chips');
+  var navPrev = panel.querySelector('.hl-nav.prev');
+  var navNext = panel.querySelector('.hl-nav.next');
+  var dragMoved = false;
   var form = panel.querySelector('.hl-form');
   var input = panel.querySelector('input');
   var sendBtn = panel.querySelector('.hl-form button');
@@ -59,6 +63,13 @@
     return d;
   }
 
+  function updateNav() {
+    var max = chipsBox.scrollWidth - chipsBox.clientWidth;
+    chipsWrap.classList.toggle('has-overflow', max > 2);
+    chipsWrap.classList.toggle('at-start', chipsBox.scrollLeft <= 2);
+    chipsWrap.classList.toggle('at-end', chipsBox.scrollLeft >= max - 2);
+  }
+
   function renderChips() {
     chipsBox.innerHTML = '';
     CHIPS.forEach(function (q) {
@@ -66,15 +77,55 @@
       b.type = 'button';
       b.className = 'hl-chip';
       b.textContent = q;
-      b.addEventListener('click', function () { ask(q); });
+      b.addEventListener('click', function () {
+        if (dragMoved) { dragMoved = false; return; }
+        ask(q);
+      });
       chipsBox.appendChild(b);
     });
+    requestAnimationFrame(updateNav);
   }
+
+  navPrev.addEventListener('click', function () { chipsBox.scrollBy({ left: -170, behavior: 'smooth' }); });
+  navNext.addEventListener('click', function () { chipsBox.scrollBy({ left: 170, behavior: 'smooth' }); });
+  chipsBox.addEventListener('scroll', updateNav, { passive: true });
+  window.addEventListener('resize', updateNav);
+
+  chipsBox.addEventListener('wheel', function (e) {
+    if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+    var max = chipsBox.scrollWidth - chipsBox.clientWidth;
+    if (max <= 0) return;
+    var next = chipsBox.scrollLeft + e.deltaY;
+    if (next > 0 && next < max) {
+      e.preventDefault();
+      chipsBox.scrollLeft = next;
+    }
+  }, { passive: false });
+
+  var dragStartX = 0, dragStartScroll = 0, dragging = false;
+  chipsBox.addEventListener('pointerdown', function (e) {
+    dragging = true; dragMoved = false;
+    dragStartX = e.clientX; dragStartScroll = chipsBox.scrollLeft;
+    chipsBox.classList.add('dragging');
+  });
+  chipsBox.addEventListener('pointermove', function (e) {
+    if (!dragging) return;
+    var dx = e.clientX - dragStartX;
+    if (Math.abs(dx) > 5) dragMoved = true;
+    chipsBox.scrollLeft = dragStartScroll - dx;
+  });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(function (ev) {
+    chipsBox.addEventListener(ev, function () {
+      dragging = false;
+      chipsBox.classList.remove('dragging');
+      setTimeout(function () { dragMoved = false; }, 50);
+    });
+  });
 
   function ask(q) {
     q = (q || '').trim();
     if (!q || busy) return;
-    chipsBox.classList.add('hidden');
+    chipsWrap.classList.add('hidden');
     busy = true;
     sendBtn.disabled = true;
     addMsg('user', q);
