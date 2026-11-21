@@ -9,7 +9,7 @@
     'Lộc có dự án cá nhân nào?',
     'Liên hệ với Lộc thế nào?'
   ];
-  var GREETING = 'Chào bạn, mình là Hỏi Lộc — trợ lý AI của Lộc. Bạn muốn biết gì về công việc, dự án hay kinh nghiệm của Lộc? Cứ hỏi mình nhé.';
+  var GREETING = 'Chào bạn, mình là Lộc Jr. — trợ lý AI của Lộc. Bạn muốn biết gì về công việc, dự án hay kinh nghiệm của Lộc? Cứ hỏi mình nhé.';
 
   function esc(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
@@ -23,14 +23,14 @@
   var fab = document.createElement('button');
   fab.className = 'hl-fab';
   fab.type = 'button';
-  fab.setAttribute('aria-label', 'Mở khung chat Hỏi Lộc');
-  fab.innerHTML = '<img src="' + AVATAR + '" alt=""><span>Hỏi Lộc</span><i class="hl-dot"></i>';
+  fab.setAttribute('aria-label', 'Mở khung chat Lộc Jr. ');
+  fab.innerHTML = '<img src="' + AVATAR + '" alt=""><span>Lộc Jr. </span><i class="hl-dot"></i>';
 
   var panel = document.createElement('section');
   panel.className = 'hl-panel';
-  panel.setAttribute('aria-label', 'Chatbot Hỏi Lộc');
+  panel.setAttribute('aria-label', 'Chatbot Lộc Jr. ');
   panel.innerHTML =
-    '<div class="hl-head"><img src="' + AVATAR + '" alt="Avatar Hỏi Lộc"><div class="hl-titles"><b>Hỏi Lộc</b><small>Trợ lý AI · trả lời về Lộc và công việc</small></div><button class="hl-close" type="button" aria-label="Đóng">✕</button></div>' +
+    '<div class="hl-head"><img src="' + AVATAR + '" alt="Avatar Lộc Jr. "><div class="hl-titles"><b>Lộc Jr. </b><small>Trợ lý AI · trả lời về Lộc và công việc</small></div><button class="hl-close" type="button" aria-label="Đóng">✕</button></div>' +
     '<div class="hl-body"></div>' +
     '<div class="hl-typing"><i></i><i></i><i></i></div>' +
     '<div class="hl-chips-wrap"><button type="button" class="hl-nav prev" aria-label="Gợi ý trước">‹</button><div class="hl-chips"></div><button type="button" class="hl-nav next" aria-label="Gợi ý tiếp">›</button></div>' +
